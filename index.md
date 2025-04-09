@@ -1,5 +1,14 @@
-# Welcome to My Site
+<h1 align="center">Allen Morin</h1>
 
-This is my personal site hosted with GitHub Pages and styled using Jekyll!
+<p align="center">
+  <img src="assets/images/Headshot.jpg" alt="Headshot" width="150" style="border-radius: 50%;">
+</p>
 
-Check out my [GitHub](https://github.com/DrakeSauce2).
+<p align="center">
+  Welcome to my site! Here's a short demo of my latest project:
+</p>
+
+<video width="320" height="240" controls>
+  <source src="assets/videos/2025 - Portfolio.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
