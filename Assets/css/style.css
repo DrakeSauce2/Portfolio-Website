@@ -1,3 +1,4 @@
+/* Base styles for larger screens (like desktop) */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -19,11 +20,82 @@ body {
 }
 
 .headshot {
-  width: 240px;
-  height: 240px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid white;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   margin-bottom: 1em;
+}
+
+/* Flexbox layout for the content section */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2em;
+  gap: 2em; /* Adds space between video and text */
+}
+
+.project-demo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.video-container {
+  flex: 1;
+  max-width: 50%; /* Keeps the video from stretching too wide */
+  display: flex;
+  justify-content: center;
+}
+
+.image-container {
+  flex: 1;
+  max-width: 50%; /* Keeps the video from stretching too wide */
+  display: flex;
+  justify-content: center;
+}
+
+.text-container {
+  flex: 1;
+  max-width: 50%; /* Makes sure text doesn’t stretch too much */
+  padding: 0 1em;
+}
+
+h2 {
+  font-size: 1.8em;
+  margin-bottom: 1em;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  /* Stack video and text vertically on smaller screens */
+  .content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .video-container {
+    max-width: 80%;
+    margin-bottom: 20px; /* Adds spacing between video and text */
+  }
+
+  .text-container {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-container video {
+    max-width: 100%; /* Ensures video scales down */
+  }
 }
