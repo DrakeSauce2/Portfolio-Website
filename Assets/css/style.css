@@ -29,6 +29,12 @@ body {
   margin-bottom: 1em;
 }
 
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 1em; /* Keeps some space on mobile screens */
+}
+
 /* Flexbox layout for the content section */
 .content {
   display: flex;
@@ -69,6 +75,28 @@ body {
   flex: 1;
   max-width: 50%; /* Makes sure text doesn’t stretch too much */
   padding: 0 1em;
+}
+
+.footer {
+  background-color: #007acc;
+  color: white;
+  padding: 2em 1em;
+  text-align: center;
+  margin-top: 4em;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #e0e0e0;
+}
+
+.footer-content p {
+  margin: 0.5em 0;
+  font-size: 1.1em;
 }
 
 h2 {
