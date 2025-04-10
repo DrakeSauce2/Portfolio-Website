@@ -32,10 +32,11 @@ body {
 /* Flexbox layout for the content section */
 .content {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding: 2em;
-  gap: 2em; /* Adds space between video and text */
+  gap: 4em; /* Adds space between video and text */
 }
 
 .project-demo {
@@ -44,6 +45,10 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.project-demo.reverse {
+  flex-direction: row-reverse; /* ← This flips the layout */
 }
 
 .video-container {
