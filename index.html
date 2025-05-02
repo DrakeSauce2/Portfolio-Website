@@ -6,25 +6,27 @@
   <link rel="stylesheet" href="Assets/css/style.css">
 </head>
 <body>
-
-  <!-- You should put your resume skills here at the top before showing projects-->>
-
-  <!-- 🌟 Banner Section -->
-  <header class="banner">
-    <div class="banner-content">
+  <canvas id="background-cubes"></canvas>
+  <header class="banner" id="header">
+    <div class="profile-section">
       <img src="Assets/Images/Headshot.jpeg" alt="Headshot" class="headshot">
+    </div>
+    <div class="about-section">
       <h1>Allen Morin</h1>
-      <p>Gameplay Programmer</p>
+      <h2 class="subtitle">Gameplay Programmer</h2>
       <p>
-        If You are seeing this I'm still working on this website :)
-
+        I specialize in building robust gameplay systems that shape player experiences. 
+        I'm proficient in Unity and Unreal Engine 5, with strong skills in C# and C++. 
+        I'm always eager to expand my expertise and contribute to exciting new projects.
       </p>
     </div>
   </header>
-<div class="container">
-
-  <main class="content">
-    <!-- First Project: Demo Reel -->
+  <nav class="nav-buttons">
+    <button onclick="scrollToSection('projects')">Projects</button>
+    <button onclick="window.open('Assets/Files/Allen_Morin_Resume.pdf')">Resume</button>
+    <button onclick="scrollToSection('contact')">Contact</button>
+  </nav>
+  <main class="content" id="projects">
     <div class="project-demo">
       <div class="video-container">
         <video width="640" height="480" controls>
@@ -46,8 +48,7 @@
         </ul>
       </div>
     </div>
-  
-    <!-- Second Project: Soulight -->
+    <hr class="project-divider">
     <div class="project-demo reverse">
       <div class="image-container">
         <img src="Assets/Images/Soulight.png" alt="Soulight Image" width="639" height="343">
@@ -63,16 +64,124 @@
         </ul>
       </div>
     </div>
+    <hr class="project-divider">
+    <div class="project-demo">
+      <div class="image-container">
+        <img src="Assets/Images/Soulight.png" alt="Soulight Image" width="639" height="343">
+      </div>
+      <div class="text-container">
+        <h2>Minecraft Clone</h2>
+        <p>
+          This was a really difficult project, I learned a whole lot about Optimization
+          and rendering. At the start I could barely render a chunk, then with the voxel
+          approach I was able to render a large minecarft like world in realtime.
+          Here are some skills I learned from this project:
+        <p>
+        <ul>
+          <li>Unity | C#</li>
+          <li>Voxels</li>
+          <li>Threading</li>
+          <li>Optimization</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="project-divider">
+    <div class="project-demo reverse">
+      <div class="image-container">
+        <img src="Assets/Images/Soulight.png" alt="Soulight Image" width="639" height="343">
+      </div>
+      <div class="text-container">
+        <h2>Jojo The Clown - UIW Game Jam</h2>
+        <p>
+          During my junior year at UIW we had our own game jam, the game jam was a week
+          long and I was paired with a team of 3 modelers and 3 animators. The game we made is
+          a horde based survival game. I learned a lot about the pipline, and made sure to communicate
+          any big progress made through daily meetings.
+        <p>
+        <ul>
+          <li>Unity | C#</li>
+          <li>Horde System</li>
+          <li>AI</li>
+          <li>Boss Fight Mechanics</li>
+        </ul>
+      </div>
+    </div>
   </main>
-
 </div>
-<!-- 🔗 Contact Section -->
-<footer class="footer">
+<nav class="nav-buttons">
+  <button onclick="scrollToSection('header')">Back Up</button>
+</nav>
+<footer class="footer" id="contact">
   <div class="footer-content">
     <p>Email: allenmorin38@gmail.com</a></p>
     <p>GitHub: <a href="https://github.com/DrakeSauce2" target="_blank">github.com/DrakeSauce2</a></p>
   </div>
 </footer>
+<script>
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
 
+  const canvas = document.getElementById('background-cubes');
+  const ctx = canvas.getContext('2d');
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let smoothX = 0;
+  let smoothY = 0;
+
+  const cubeSize = 35;
+  let cols, rows;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    cols = Math.ceil(canvas.width / cubeSize);
+    rows = Math.ceil(canvas.height / cubeSize);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function draw() {
+    // Smooth follow using linear interpolation
+    const lerpFactor = 0.2; // Smaller = more lag
+    smoothX += (mouseX - smoothX) * lerpFactor;
+    smoothY += (mouseY - smoothY) * lerpFactor;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const maxDist = 200; // Radius of influence around the mouse
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const centerX = x * cubeSize + cubeSize / 2;
+        const centerY = y * cubeSize + cubeSize / 2;
+
+        const dx = smoothX - centerX;
+        const dy = smoothY - centerY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Linear falloff scale
+        let scale = 1 - Math.min(dist / maxDist, 1);
+        scale = Math.max(scale, 0.2); // Prevent full shrink
+
+        const size = cubeSize * scale;
+
+        ctx.fillStyle = `rgba(200, 200, 255, ${scale * 0.3})`;
+        ctx.fillRect(centerX - size / 2, centerY - size / 2, size, size);
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw(); // Start loop
+</script>
 </body>
 </html>
